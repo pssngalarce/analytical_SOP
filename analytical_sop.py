@@ -204,7 +204,7 @@ i = model.I_t()
 
 with col2:
     plt.rcParams.update({
-    'text.usetex': True,        
+    'text.usetex': False,        
     'font.family': 'serif',     
     'axes.facecolor': 'white',   
     'figure.facecolor': 'white', 
