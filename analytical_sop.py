@@ -10,78 +10,38 @@ st.set_page_config(
 
 st.markdown("""
 <style>
-    
-    header[data-testid="stHeader"] {
-        display: none;
+    /* ocultar header y deploy button (igual que antes) */
+    header[data-testid="stHeader"],
+    .stDeployButton { display: none !important; }
+
+    /* títulos compactos */
+    h1 { font-size: 1.5rem; margin: 0.5rem 0; text-align: center; }
+    h2, h3 { font-size: 1rem; margin: 0.3rem 0; }
+
+    /* controles más juntos */
+    .stSlider,
+    .stCheckbox,
+    .element-container {
+        margin: 0.2rem 0 !important;
     }
-    
-    .stDeployButton {
-        display: none;
-    }
-    
-    h1 { 
-        font-size: 1.5rem;
-        margin: 0.5rem 0;
-        text-align: center;
-    }
-    
-    h2, h3 {
-        font-size: 1rem;
-        margin: 0.3rem 0;
+    .stSlider > div > div > div > div {
+        font-size: 0.8rem !important;
     }
 
-    .stSlider {
-        margin: 0.2rem 0;
-    }
-    
-    .stSlider > div > div > div > div {
-        font-size: 0.8rem;
-    }
-    
-    .stCheckbox {
-        margin: 0.2rem 0;
-    }
-    
-    .element-container {
-        margin: 0.1rem 0;
-    }
-    
-    .main {
-        height: 100vh;
-        overflow: hidden;
-    }
-    
-    .stHorizontalBlock {
-        height: calc(100vh - 4rem);
-        align-items: stretch;
-    }
-    
-    .control-panel {
-        height: calc(100vh - 4rem);
-        overflow-y: auto;
-        padding-right: 0.5rem;
-    }
-    
+    /* Quitamos alturas forzadas */
+    .main,
+    .stHorizontalBlock,
+    .control-panel,
     .plot-container {
-        height: calc(100vh - 4rem);
-        display: flex;
-        align-items: center;
-        justify-content: center;
+        height: auto !important;
+        overflow: visible !important;
+    }
+
+    /* Alineamos la fila horizontal al inicio */
+    .stHorizontalBlock {
+        align-items: flex-start !important;
     }
 </style>
-
-<script>
-function adjustLayout() {
-    const vh = window.innerHeight * 0.01;
-    document.documentElement.style.setProperty('--vh', `${vh}px`);
-    
-    window.dispatchEvent(new Event('resize'));
-}
-
-window.addEventListener('load', adjustLayout);
-window.addEventListener('resize', adjustLayout);
-adjustLayout();
-</script>
 """, unsafe_allow_html=True)
 
 st.title("Analytical SOP Simulator")
