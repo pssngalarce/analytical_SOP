@@ -9,10 +9,20 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Setup Git user
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
 
       - name: Create empty commit
-        uses: peter-evans/create-commit@v4
+        run: |
+          git commit --allow-empty -m "chore: scheduled empty commit [skip ci]"
+
+      - name: Push changes
+        uses: ad-m/github-push-action@v0.6.0
         with:
-          commit-message: "chore: scheduled empty commit [skip ci]"
-          allow-empty: true
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: main
