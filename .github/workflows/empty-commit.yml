@@ -1,10 +1,7 @@
 name: Scheduled Empty Commit
 
-# Adjust the cron to your preferred schedule.
-# e.g. '0 0 * * *' = every day at midnight UTC
 on:
   schedule:
-    # At minute 0 past every 6th hour
     - cron: '0 */6 * * *'
 
 jobs:
@@ -12,25 +9,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # 1. Check out the repo
-      - name: Checkout repository
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v3
 
-      # 2. Configure Git user for the commit
-      - name: Setup Git user
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-
-      # 3. Create the empty commit
       - name: Create empty commit
-        run: |
-          git commit --allow-empty -m "chore: scheduled empty commit [skip ci]"
-
-      # 4. Push back to the repo
-      - name: Push changes
-        uses: ad-m/github-push-action@v0.6.0
+        uses: peter-evans/create-commit@v4
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          # ensure this matches your default branch
-          branch: main
+          commit-message: "chore: scheduled empty commit [skip ci]"
+          allow-empty: true
